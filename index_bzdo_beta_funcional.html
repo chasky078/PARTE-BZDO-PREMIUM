@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#06111f" />
+  <title>Barnizado · Parte Control Cola</title>
+  <style>
+    :root{
+      --bg:#050b14;
+      --bg2:#071426;
+      --card:#0d2239;
+      --card2:#102b49;
+      --line:#24496e;
+      --text:#f4f8ff;
+      --muted:#96acc6;
+      --blue:#22a8ff;
+      --blue2:#006fd1;
+      --cyan:#48e2ff;
+      --green:#27d17d;
+      --yellow:#ffd34d;
+      --red:#ff5b6e;
+      --orange:#ff9d33;
+      --shadow:0 22px 55px rgba(0,0,0,.42);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{
+      background:
+        radial-gradient(circle at 10% -10%, rgba(34,168,255,.28), transparent 35%),
+        radial-gradient(circle at 100% 95%, rgba(0,111,209,.22), transparent 33%),
+        linear-gradient(145deg,#050b14,#071426 45%,#0b2138);
+      padding:16px;
+    }
+    .app{max-width:1220px;margin:auto;padding-bottom:95px}.hidden{display:none!important}
+    button{border:0;border-radius:18px;padding:15px 18px;min-height:54px;color:white;font-size:15px;font-weight:950;letter-spacing:.02em;background:linear-gradient(135deg,var(--blue),var(--blue2));box-shadow:0 14px 30px rgba(0,111,209,.34);cursor:pointer}
+    button:active{transform:scale(.98)}
+    .ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);box-shadow:none}.green{background:linear-gradient(135deg,#27d17d,#0c8f4f)}.yellow{background:linear-gradient(135deg,#ffd34d,#c97900);color:#132033}.red{background:linear-gradient(135deg,#ff5b6e,#b80d26)}.orange{background:linear-gradient(135deg,#ff9d33,#c45200)}
+    .screen{min-height:calc(100vh - 32px)}
+
+    .splash{display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+    .splash:before{content:"BARNIZADO";position:absolute;font-size:13vw;font-weight:1000;color:rgba(255,255,255,.035);letter-spacing:.02em;transform:rotate(-8deg);white-space:nowrap;pointer-events:none}
+    .splashCard{position:relative;width:min(760px,100%);padding:38px 24px;border:1px solid rgba(255,255,255,.13);border-radius:34px;background:linear-gradient(160deg,rgba(16,43,73,.94),rgba(5,14,27,.92));box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+    .logo{width:92px;height:92px;border-radius:28px;margin:0 auto 18px;background:linear-gradient(145deg,#eaf7ff,#88ddff 58%,#0a76cf);display:grid;place-items:center;color:#06111f;font-weight:1000;font-size:30px;box-shadow:0 18px 35px rgba(34,168,255,.28), inset 0 0 18px rgba(255,255,255,.48)}
+    .badge{display:inline-flex;padding:8px 14px;border-radius:999px;border:1px solid rgba(72,226,255,.35);background:rgba(72,226,255,.08);color:#dff9ff;font-size:12px;font-weight:950;letter-spacing:.12em}
+    h1{margin:16px 0 8px;font-size:clamp(36px,7vw,76px);line-height:.9;letter-spacing:-.055em}.sub{margin:0;color:var(--muted);font-size:19px;font-weight:750}.plant{margin:14px 0 26px;color:#dff9ff;font-weight:950;letter-spacing:.16em}.firma{margin-top:18px;color:rgba(255,255,255,.48);font-size:13px;font-weight:950;letter-spacing:.08em}
+
+    .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;position:sticky;top:0;z-index:20;padding:10px 0;background:linear-gradient(180deg,rgba(6,17,31,.97),rgba(6,17,31,.76),transparent);backdrop-filter:blur(10px)}
+    .brand strong{display:block;font-size:24px;letter-spacing:-.03em}.brand span{display:block;color:var(--muted);font-size:13px;font-weight:850;margin-top:3px}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(72,226,255,.08);border:1px solid rgba(72,226,255,.24);color:#dff9ff;font-size:12px;font-weight:950;letter-spacing:.06em}
+
+    .grid{display:grid;gap:16px}.two{grid-template-columns:minmax(0,1fr) minmax(330px,430px)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .card{background:linear-gradient(160deg,rgba(16,43,73,.92),rgba(9,25,45,.88));border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}.title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.title h2,.title h3{margin:0;font-size:20px;letter-spacing:-.02em}.title small{color:var(--muted);font-weight:950}
+    label{display:block;margin-bottom:8px;color:#cfe3f8;font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.09em}input,select,textarea{width:100%;min-height:52px;border:1px solid rgba(255,255,255,.15);border-radius:16px;background:#071829;color:var(--text);padding:12px 14px;font-size:17px;outline:none}textarea{min-height:96px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(34,168,255,.75);box-shadow:0 0 0 4px rgba(34,168,255,.12)}.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px}.wide{grid-column:1/-1}
+
+    .lineBtn{height:112px;border-radius:24px;background:linear-gradient(160deg,#123b65,#0b2039);border:1px solid rgba(72,226,255,.18);font-size:29px;box-shadow:0 18px 36px rgba(0,0,0,.3)}.lineBtn span{display:block;margin-top:8px;color:var(--muted);font-size:12px;letter-spacing:.12em}
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px}.pill{padding:13px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);font-weight:950;cursor:pointer;user-select:none}.pill.active{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:transparent;box-shadow:0 10px 24px rgba(34,168,255,.24)}.pill.green.active{background:linear-gradient(135deg,#27d17d,#0c8f4f)}.pill.yellow.active{background:linear-gradient(135deg,#ffd34d,#c97900);color:#132033}.pill.blue.active{background:linear-gradient(135deg,#48e2ff,#0e81d9)}
+    .status{display:inline-flex;border-radius:999px;padding:8px 12px;border:1px solid rgba(255,255,255,.15);font-size:12px;font-weight:950;letter-spacing:.08em}.abierto{background:rgba(39,209,125,.13);border-color:rgba(39,209,125,.35);color:#a8ffd1}.incompleto{background:rgba(255,211,77,.13);border-color:rgba(255,211,77,.35);color:#ffe9a3}.fin{background:rgba(159,182,207,.13);border-color:rgba(159,182,207,.25);color:#e9f3ff}.obs{background:rgba(72,226,255,.13);border-color:rgba(72,226,255,.35);color:#c8f8ff}.ret{background:rgba(255,211,77,.18);border-color:rgba(255,211,77,.45);color:#ffe9a3}
+
+    .list{display:grid;gap:12px}.item{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:20px;padding:14px;display:grid;gap:10px}.row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}.item strong{font-size:19px}.item p{margin:4px 0 0;color:var(--muted);font-weight:750}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}.stat{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px}.stat small{display:block;color:var(--muted);font-size:11px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.stat b{font-size:20px}
+
+    .labelPreview{position:sticky;top:92px;background:linear-gradient(160deg,#dfe5eb,#bfc9d2);color:#111b25;border-radius:22px;padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.45)}
+    .labelTop{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid rgba(17,27,37,.22);padding-bottom:12px;margin-bottom:12px}.labelLogo{font-weight:1000;font-size:22px;letter-spacing:-.04em}.labelPlant{font-weight:950;font-size:11px;color:#344658;letter-spacing:.1em}.labelMaterial{font-size:34px;line-height:1;font-weight:1000;letter-spacing:-.05em;margin:14px 0;color:#071426}.labelGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.labelField{background:rgba(255,255,255,.45);border:1px solid rgba(17,27,37,.12);border-radius:10px;padding:8px}.labelField small{display:block;font-size:10px;font-weight:1000;color:#506273;text-transform:uppercase;letter-spacing:.08em}.labelField b{font-size:15px}.stamp{display:none;position:absolute;right:18px;bottom:18px;border:4px solid #c7182d;color:#c7182d;border-radius:14px;padding:8px 10px;font-size:16px;font-weight:1000;transform:rotate(-9deg);opacity:.9;text-align:center;line-height:1.05}.stamp.show{display:block}.labelNote{margin-top:12px;color:#516170;font-size:11px;font-weight:900}
+
+    .collapseHead{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}.paletsBody{display:none;margin-top:12px}.paletsBody.open{display:block}.paletsResult{margin-top:10px;color:#dff9ff;font-weight:950;display:none}
+    .bottomBar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:linear-gradient(180deg,transparent,rgba(5,11,20,.92) 24%,rgba(5,11,20,.98));padding:16px;pointer-events:none}.bottomBar .inner{max-width:1220px;margin:auto;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;pointer-events:auto}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);z-index:1000;background:#071829;border:1px solid rgba(72,226,255,.35);box-shadow:var(--shadow);border-radius:16px;padding:14px 18px;font-weight:950;color:#eafaff;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;bottom:104px}.watermark{position:fixed;right:16px;bottom:12px;z-index:4;color:rgba(255,255,255,.28);font-size:12px;font-weight:950;letter-spacing:.08em;pointer-events:none}
+    @media(max-width:850px){body{padding:12px}.two{grid-template-columns:1fr}.labelPreview{position:relative;top:auto}.topbar{flex-direction:column}.actions{width:100%}.actions button{flex:1}.splash:before{font-size:19vw}.labelMaterial{font-size:28px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section id="splash" class="screen splash">
+      <div class="splashCard">
+        <div class="logo">BZ</div>
+        <span class="badge">PARTE CONTROL COLA</span>
+        <h1>BARNIZADO</h1>
+        <p class="sub">Control de tirajes, paquetes y cola</p>
+        <div class="plant">SONOCO · ASTURIAS</div>
+        <button onclick="go('turno')">INICIAR</button>
+        <div class="firma">By Rubén D.® 268</div>
+      </div>
+    </section>
+
+    <section id="turno" class="screen hidden">
+      <div class="topbar"><div class="brand"><strong>Inicio de turno</strong><span>Selecciona línea y operario</span></div><div class="actions"><button class="ghost" onclick="go('splash')">Inicio</button></div></div>
+      <div class="card">
+        <div class="title"><h2>Datos de entrada</h2><small>SONOCO · ASTURIAS</small></div>
+        <div class="form">
+          <div><label>Línea</label><select id="lineaTurno"><option>LA15</option><option>LA16</option><option>LA17</option><option>LA20</option><option>LA21</option><option>LA25</option><option>LP02</option><option>LP03</option><option>LP04</option></select></div>
+          <div><label>Turno</label><select id="turnoActual"><option>Mañana</option><option>Tarde</option><option>Noche</option></select></div>
+          <div><label>Fecha</label><input id="fechaTurno" type="date"></div>
+          <div><label>Nº operario</label><input id="operario" inputmode="numeric" placeholder="Ej: 27"></div>
+        </div><br>
+        <button onclick="iniciarTurno()">INICIAR TURNO</button>
+      </div>
+    </section>
+
+    <section id="panel" class="screen hidden">
+      <div class="topbar">
+        <div class="brand"><strong id="panelTitle">Línea</strong><span id="sessionInfo">Turno</span></div>
+        <div class="actions"><span class="chip" id="chipSession">Operario</span><button onclick="nuevoTiraje()">+ AÑADIR TIRAJE</button><button class="orange" onclick="finTurno()">FIN TURNO</button></div>
+      </div>
+      <div class="card"><div class="title"><h2>Tirajes de la línea</h2><small id="tirajeCount">0</small></div><div id="tirajeList" class="list"></div></div>
+    </section>
+
+    <section id="editor" class="screen hidden">
+      <div class="topbar">
+        <div class="brand"><strong id="editorTitle">Tiraje</strong><span id="editorSub">Parte Control Cola</span></div>
+        <div class="actions"><span class="chip" id="editorChip">Operario</span><button class="ghost" onclick="openPanel(app.linea)">Volver</button><button class="yellow" onclick="setTirajeEstado('INCOMPLETO')">Incompleto</button><button class="green" onclick="setTirajeEstado('FIN TIRAJE')">Fin tiraje</button></div>
+      </div>
+
+      <div class="grid two">
+        <div class="grid">
+          <div class="card">
+            <div class="title"><h2>Datos del tiraje</h2><span id="estadoTiraje" class="status abierto">ABIERTO</span></div>
+            <div class="form">
+              <div><label>Orden / Tiraje</label><input id="tiraje" inputmode="numeric" placeholder="Nº tiraje"></div>
+              <div><label>Material</label><input id="material" placeholder="310661 - 00023"></div>
+              <div class="wide"><label>Aplicación</label><input id="aplicacion" placeholder="Ej: G28/LIP"></div>
+              <div><label>Huella</label><input id="huella" placeholder="Gramaje"></div>
+              <div><label>Cara</label><div class="pillRow"><div id="ci" class="pill" onclick="toggle('ci')">CI · Interior</div><div id="ce" class="pill" onclick="toggle('ce')">CE · Exterior</div></div></div>
+              <div><label>Litografía / sello</label><div class="pillRow"><div id="lito" class="pill" onclick="toggle('lito');updateLabel()">Lleva lito</div><div id="ultimo" class="pill" onclick="toggle('ultimo');updateLabel()">Último pase</div></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="collapseHead" onclick="togglePalets()"><div><h2 style="margin:0">Buscar color PALETS</h2><small style="color:var(--muted);font-weight:950">Desplegable para consulta rápida</small></div><button class="ghost" type="button">Abrir</button></div>
+            <div id="paletsBody" class="paletsBody">
+              <div class="form"><div><label>Ancho</label><input id="paletAncho" inputmode="numeric"></div><div><label>Largo</label><input id="paletLargo" inputmode="numeric"></div></div><br>
+              <button class="ghost" onclick="buscarPalets()">BUSCAR PALETS</button><div id="paletsResult" class="paletsResult"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="title"><h2>Paquete actual</h2><small>Control cola</small></div>
+            <div class="form">
+              <div><label>Nº paquete</label><input id="paqNumero" inputmode="numeric" placeholder="Ej: 1"></div>
+              <div><label>Matrícula</label><input id="matricula" inputmode="numeric" placeholder="350..."></div>
+              <div><label>Predecesor</label><input id="predecesor" inputmode="numeric" placeholder="350..."></div>
+              <div><label>Hojas etiqueta</label><input id="hojasEtiqueta" inputmode="numeric"></div>
+              <div><label>Hojas contador</label><input id="hojasContador" inputmode="numeric"></div>
+              <div><label>Hojas revisadas</label><input id="hojasRevisadas" inputmode="numeric"></div>
+              <div><label>Buenas añadidas</label><input id="hojasBuenas" inputmode="numeric"></div>
+              <div><label>Maculas</label><input id="maculas" inputmode="numeric"></div>
+              <div><label>Total hojas</label><input id="totalHojas" inputmode="numeric"></div>
+              <div class="wide"><label>Fleje / Volteo / Cerrar</label><div class="pillRow"><div id="fleje" class="pill green" onclick="toggle('fleje')">FLEJE</div><div id="volteo" class="pill" onclick="toggle('volteo')">VOLTEO</div><div id="cerrar" class="pill" onclick="toggle('cerrar')">CERRAR</div></div></div>
+              <div class="wide"><label>Estado paquete</label><div class="pillRow"><div id="normal" class="pill green active" onclick="setEstadoPaquete('NORMAL')">NORMAL</div><div id="observacion" class="pill blue" onclick="setEstadoPaquete('OBSERVACIÓN')">OBSERVACIÓN AZUL</div><div id="retenido" class="pill yellow" onclick="setEstadoPaquete('RETENIDO')">RETENIDO / REVISIÓN</div></div></div>
+              <div class="wide"><label>Observaciones</label><textarea id="observaciones" placeholder="Notas, etiqueta azul, aviso para siguiente turno..."></textarea></div>
+            </div>
+          </div>
+
+          <div class="card"><div class="title"><h2>Paquetes guardados</h2><small id="packageCount">0</small></div><div id="packageList" class="list"></div></div>
+        </div>
+
+        <aside>
+          <div class="labelPreview">
+            <div class="labelTop"><div><div class="labelLogo">SONOCO</div><div class="labelPlant">ASTURIAS</div></div><div style="text-align:right"><b id="lpLinea">LA--</b><br><small id="lpFecha">--/--/----</small></div></div>
+            <div class="labelMaterial" id="lpMaterial">310661 - 00023</div>
+            <div class="labelGrid">
+              <div class="labelField"><small>Aplicación</small><b id="lpAplicacion">G28/LIP</b></div>
+              <div class="labelField"><small>Cara</small><b id="lpCara">CI / CE</b></div>
+              <div class="labelField"><small>Matrícula</small><b id="lpMatricula">350...</b></div>
+              <div class="labelField"><small>Predecesor</small><b id="lpPredecesor">350...</b></div>
+              <div class="labelField"><small>Paquete</small><b id="lpPaq">--</b></div>
+              <div class="labelField"><small>Hojas</small><b id="lpHojas">--</b></div>
+            </div>
+            <div id="stamp" class="stamp">COMPROBADA<br>LITOGRAFÍA</div>
+            <div class="labelNote">Simulación visual · No sustituye etiqueta original</div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="bottomBar"><div class="inner"><button onclick="limpiarPaquete()">+ AÑADIR PAQUETE</button><button class="green" onclick="guardarPaquete()">GUARDAR PAQUETE</button><button onclick="guardarTiraje()">GUARDAR TIRAJE</button><button class="orange" onclick="finTurno()">FIN TURNO</button></div></div>
+    </section>
+  </div>
+
+  <div class="watermark">By Rubén D.® 268</div>
+  <div id="toast" class="toast">Guardado</div>
+
+  <script>
+    const KEY='BZDO_PREMIUM_BETA_V1';
+    const $=id=>document.getElementById(id);
+    let data=load();
+    let app={linea:'',turno:'',fecha:'',operario:'',tirajeId:null,estadoPaquete:'NORMAL'};
+
+    function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+    function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+    function go(id){['splash','turno','panel','editor'].forEach(s=>$(s).classList.add('hidden'));$(id).classList.remove('hidden');window.scrollTo(0,0)}
+    function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
+    function today(){return new Date().toISOString().slice(0,10)}
+    function uid(){return Date.now()+'_'+Math.random().toString(16).slice(2)}
+    $('fechaTurno').value=today();
+
+    function iniciarTurno(){
+      if(!$('operario').value.trim()){toast('Mete Nº operario');return}
+      app.linea=$('lineaTurno').value; app.turno=$('turnoActual').value; app.fecha=$('fechaTurno').value; app.operario=$('operario').value.trim();
+      openPanel(app.linea);
+    }
+    function sessionText(){return `${app.linea} · ${app.turno} · Operario ${app.operario} · ${app.fecha}`}
+    function openPanel(linea){
+      app.linea=linea; $('panelTitle').textContent=`${linea} · Tirajes`; $('sessionInfo').textContent=sessionText(); $('chipSession').textContent=`OP ${app.operario}`; renderTirajes(); go('panel');
+    }
+    function renderTirajes(){
+      const list=data.filter(t=>t.linea===app.linea).sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+      $('tirajeCount').textContent=list.length+' registros';
+      $('tirajeList').innerHTML=list.length?list.map(t=>`<div class="item"><div class="row"><div><strong>${t.tiraje||'Sin tiraje'} · ${t.material||'Sin material'}</strong><p>${t.aplicacion||'Sin aplicación'} · ${t.paquetes.length} paquetes</p></div>${estadoHtml(t.estado)}</div><div class="pillRow"><button onclick="abrirTiraje('${t.id}')">Abrir</button><button class="red" onclick="borrarTiraje('${t.id}')">Borrar</button></div></div>`).join(''):`<div class="item"><strong>Sin tirajes</strong><p>Pulsa “+ Añadir tiraje”.</p></div>`;
+    }
+    function estadoHtml(e){let c=e==='FIN TIRAJE'?'fin':e==='INCOMPLETO'?'incompleto':'abierto';return `<span class="status ${c}">${e||'ABIERTO'}</span>`}
+    function nuevoTiraje(){
+      const t={id:uid(),linea:app.linea,fecha:app.fecha,turnoInicio:app.turno,operarioInicio:app.operario,estado:'ABIERTO',tiraje:'',material:'',aplicacion:'',huella:'',ci:false,ce:false,lito:false,ultimo:false,paquetes:[],updated:new Date().toISOString()};
+      data.push(t); save(); abrirTiraje(t.id);
+    }
+    function getT(){return data.find(t=>t.id===app.tirajeId)}
+    function abrirTiraje(id){
+      app.tirajeId=id; const t=getT(); if(!t)return;
+      $('editorTitle').textContent=`${app.linea} · ${t.tiraje||'Nuevo tiraje'}`; $('editorSub').textContent=sessionText(); $('editorChip').textContent=`OP ${app.operario}`;
+      $('tiraje').value=t.tiraje||''; $('material').value=t.material||''; $('aplicacion').value=t.aplicacion||''; $('huella').value=t.huella||'';
+      setActive('ci',!!t.ci); setActive('ce',!!t.ce); setActive('lito',!!t.lito); setActive('ultimo',!!t.ultimo); renderEstadoTiraje(); renderPackages(); limpiarPaquete(false); updateLabel(); go('editor');
+    }
+    function readT(){const t=getT(); if(!t)return; t.tiraje=$('tiraje').value.trim(); t.material=$('material').value.trim(); t.aplicacion=$('aplicacion').value.trim(); t.huella=$('huella').value.trim(); t.ci=$('ci').classList.contains('active'); t.ce=$('ce').classList.contains('active'); t.lito=$('lito').classList.contains('active'); t.ultimo=$('ultimo').classList.contains('active'); t.updated=new Date().toISOString(); $('editorTitle').textContent=`${app.linea} · ${t.tiraje||'Nuevo tiraje'}`; updateLabel();}
+    function guardarTiraje(){readT(); save(); toast('Tiraje guardado')}
+    function setTirajeEstado(e){readT(); const t=getT(); t.estado=e; t.updated=new Date().toISOString(); save(); renderEstadoTiraje(); toast(e)}
+    function renderEstadoTiraje(){const t=getT(); $('estadoTiraje').outerHTML=estadoHtml(t?.estado).replace('status','status id="estadoTiraje"')}
+    function borrarTiraje(id){if(prompt('Escribe BORRAR para eliminar')!=='BORRAR')return; data=data.filter(t=>t.id!==id); save(); renderTirajes(); toast('Tiraje borrado')}
+
+    function toggle(id){$(id).classList.toggle('active'); readT();}
+    function setActive(id,v){$(id).classList.toggle('active',v)}
+    function setEstadoPaquete(e){app.estadoPaquete=e; setActive('normal',e==='NORMAL'); setActive('observacion',e==='OBSERVACIÓN'); setActive('retenido',e==='RETENIDO')}
+    function limpiarPaquete(scroll=true){['paqNumero','matricula','predecesor','hojasEtiqueta','hojasContador','hojasRevisadas','hojasBuenas','maculas','totalHojas','observaciones'].forEach(id=>$(id).value=''); ['fleje','volteo','cerrar'].forEach(id=>setActive(id,false)); setEstadoPaquete('NORMAL'); updateLabel(); if(scroll)toast('Nuevo paquete listo')}
+    function guardarPaquete(){readT(); const t=getT(); if(!t)return; const p={numero:$('paqNumero').value.trim(),matricula:$('matricula').value.trim(),predecesor:$('predecesor').value.trim(),hojasEtiqueta:$('hojasEtiqueta').value.trim(),hojasContador:$('hojasContador').value.trim(),hojasRevisadas:$('hojasRevisadas').value.trim(),hojasBuenas:$('hojasBuenas').value.trim(),maculas:$('maculas').value.trim(),totalHojas:$('totalHojas').value.trim(),fleje:$('fleje').classList.contains('active'),volteo:$('volteo').classList.contains('active'),cerrar:$('cerrar').classList.contains('active'),estado:app.estadoPaquete,observaciones:$('observaciones').value.trim(),operario:app.operario,turno:app.turno,fecha:app.fecha,created:new Date().toISOString()}; t.paquetes.push(p); t.updated=new Date().toISOString(); save(); renderPackages(); toast('Paquete guardado');}
+    function renderPackages(){const t=getT(); const list=t?.paquetes||[]; $('packageCount').textContent=list.length+' paquetes'; $('packageList').innerHTML=list.length?list.map((p,i)=>{let c=p.estado==='RETENIDO'?'ret':p.estado==='OBSERVACIÓN'?'obs':'abierto'; return `<div class="item"><div class="row"><div><strong>Paquete ${p.numero||i+1}</strong><p>Matrícula ${p.matricula||'-'} · Predecesor ${p.predecesor||'-'}</p></div><span class="status ${c}">${p.estado}</span></div><div class="stats"><div class="stat"><small>Etiqueta</small><b>${p.hojasEtiqueta||'-'}</b></div><div class="stat"><small>Contador</small><b>${p.hojasContador||'-'}</b></div><div class="stat"><small>Buenas</small><b>${p.hojasBuenas||'-'}</b></div><div class="stat"><small>Maculas</small><b>${p.maculas||'-'}</b></div><div class="stat"><small>Total</small><b>${p.totalHojas||'-'}</b></div></div>${p.observaciones?`<p><b>Obs:</b> ${esc(p.observaciones)}</p>`:''}</div>`}).join(''):`<div class="item"><strong>Sin paquetes guardados</strong><p>Añade el primer paquete del tiraje.</p></div>`}
+    function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+    function updateLabel(){const t=getT()||{}; const cara=[t.ci?'CI':'',t.ce?'CE':''].filter(Boolean).join(' / ')||'CI / CE'; $('lpLinea').textContent=app.linea||'LA--'; $('lpFecha').textContent=app.fecha||'--/--/----'; $('lpMaterial').textContent=$('material')?.value||'310661 - 00023'; $('lpAplicacion').textContent=$('aplicacion')?.value||'G28/LIP'; $('lpCara').textContent=cara; $('lpMatricula').textContent=$('matricula')?.value||'350...'; $('lpPredecesor').textContent=$('predecesor')?.value||'350...'; $('lpPaq').textContent=$('paqNumero')?.value||'--'; $('lpHojas').textContent=$('totalHojas')?.value||$('hojasEtiqueta')?.value||'--'; $('stamp').classList.toggle('show',!!(t.lito&&t.ultimo));}
+    function autoTotal(){const c=parseInt($('hojasContador').value||'0',10); const b=parseInt($('hojasBuenas').value||'0',10); if(c||b)$('totalHojas').value=String(c+b); updateLabel();}
+    function togglePalets(){$('paletsBody').classList.toggle('open')}
+    function buscarPalets(){const a=$('paletAncho').value.trim(),l=$('paletLargo').value.trim(); $('paletsResult').style.display='block'; $('paletsResult').innerHTML=a&&l?`Simulacro beta → ${a} x ${l}<br>COLOR PALET: pendiente · DOULITE: pendiente`:'Mete ancho y largo.'}
+    function finTurno(){if(!confirm('¿Finalizar turno actual?'))return; toast('Turno finalizado'); go('turno')}
+    ['tiraje','material','aplicacion','huella','paqNumero','matricula','predecesor','hojasEtiqueta','totalHojas'].forEach(id=>setTimeout(()=>$(id)?.addEventListener('input',()=>{readT();updateLabel()}),0));
+    ['hojasContador','hojasBuenas'].forEach(id=>setTimeout(()=>$(id)?.addEventListener('input',autoTotal),0));
+  </script>
+</body>
+</html>
