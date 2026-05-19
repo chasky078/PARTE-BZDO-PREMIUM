@@ -241,7 +241,7 @@ $('tiraje')?.value || '10100893';
     function togglePalets(){$('paletsBody').classList.toggle('open')}
     function buscarPalets(){const a=$('paletAncho').value.trim(),l=$('paletLargo').value.trim(); $('paletsResult').style.display='block'; $('paletsResult').innerHTML=a&&l?`Simulacro beta → ${a} x ${l}<br>COLOR PALET: pendiente · DOULITE: pendiente`:'Mete ancho y largo.'}
     function finTurno(){if(!confirm('¿Finalizar turno actual?'))return; toast('Turno finalizado'); go('turno')}
-    ['tiraje','material','aplicacion','huella','paqNumero','matricula','predecesor','hojasEtiqueta','totalHojas'].forEach(id=>setTimeout(()=>$(id)?.addEventListener('input',()=>{readT();updateLabel()}),0));
+    ['$('tiraje')?.value || '10100893';','material','aplicacion','huella','paqNumero','matricula','predecesor','hojasEtiqueta','totalHojas'].forEach(id=>setTimeout(()=>$(id)?.addEventListener('input',()=>{readT();updateLabel()}),0));
     ['hojasContador','hojasBuenas'].forEach(id=>setTimeout(()=>$(id)?.addEventListener('input',autoTotal),0));
   </script>
 </body>
