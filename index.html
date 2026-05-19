@@ -156,6 +156,10 @@
           <div class="labelPreview">
             <div class="labelTop"><div><div class="labelLogo">SONOCO</div><div class="labelPlant">ASTURIAS</div></div><div style="text-align:right"><b id="lpLinea">LA--</b><br><small id="lpFecha">--/--/----</small></div></div>
             <div class="labelMaterial" id="lpMaterial">310661 - 00023</div>
+            <div class="labelField">
+  <small>Tiraje</small>
+  <b id="lpTiraje">10100893</b>
+            </div>
             <div class="labelGrid">
               <div class="labelField"><small>Aplicación</small><b id="lpAplicacion">G28/LIP</b></div>
               <div class="labelField"><small>Cara</small><b id="lpCara">CI / CE</b></div>
@@ -231,6 +235,8 @@
     function renderPackages(){const t=getT(); const list=t?.paquetes||[]; $('packageCount').textContent=list.length+' paquetes'; $('packageList').innerHTML=list.length?list.map((p,i)=>{let c=p.estado==='RETENIDO'?'ret':p.estado==='OBSERVACIÓN'?'obs':'abierto'; return `<div class="item"><div class="row"><div><strong>Paquete ${p.numero||i+1}</strong><p>Matrícula ${p.matricula||'-'} · Predecesor ${p.predecesor||'-'}</p></div><span class="status ${c}">${p.estado}</span></div><div class="stats"><div class="stat"><small>Etiqueta</small><b>${p.hojasEtiqueta||'-'}</b></div><div class="stat"><small>Contador</small><b>${p.hojasContador||'-'}</b></div><div class="stat"><small>Buenas</small><b>${p.hojasBuenas||'-'}</b></div><div class="stat"><small>Maculas</small><b>${p.maculas||'-'}</b></div><div class="stat"><small>Total</small><b>${p.totalHojas||'-'}</b></div></div>${p.observaciones?`<p><b>Obs:</b> ${esc(p.observaciones)}</p>`:''}</div>`}).join(''):`<div class="item"><strong>Sin paquetes guardados</strong><p>Añade el primer paquete del tiraje.</p></div>`}
     function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
     function updateLabel(){const t=getT()||{}; const cara=[t.ci?'CI':'',t.ce?'CE':''].filter(Boolean).join(' / ')||'CI / CE'; $('lpLinea').textContent=app.linea||'LA--'; $('lpFecha').textContent=app.fecha||'--/--/----'; $('lpMaterial').textContent=$('material')?.value||'310661 - 00023'; $('lpAplicacion').textContent=$('aplicacion')?.value||'G28/LIP'; $('lpCara').textContent=cara; $('lpMatricula').textContent=$('matricula')?.value||'350...'; $('lpPredecesor').textContent=$('predecesor')?.value||'350...'; $('lpPaq').textContent=$('paqNumero')?.value||'--'; $('lpHojas').textContent=$('totalHojas')?.value||$('hojasEtiqueta')?.value||'--'; $('stamp').classList.toggle('show',!!(t.lito&&t.ultimo));}
+    $('lpTiraje').textContent =
+$('tiraje')?.value || '10100893';
     function autoTotal(){const c=parseInt($('hojasContador').value||'0',10); const b=parseInt($('hojasBuenas').value||'0',10); if(c||b)$('totalHojas').value=String(c+b); updateLabel();}
     function togglePalets(){$('paletsBody').classList.toggle('open')}
     function buscarPalets(){const a=$('paletAncho').value.trim(),l=$('paletLargo').value.trim(); $('paletsResult').style.display='block'; $('paletsResult').innerHTML=a&&l?`Simulacro beta → ${a} x ${l}<br>COLOR PALET: pendiente · DOULITE: pendiente`:'Mete ancho y largo.'}
