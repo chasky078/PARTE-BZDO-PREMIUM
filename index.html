@@ -76,7 +76,11 @@
         <h1>BARNIZADO</h1>
         <p class="sub">Control de tirajes, paquetes y cola</p>
         <div class="plant">SONOCO · ASTURIAS</div>
-        <button onclick="go('turno')">INICIAR</button>
+        <button onclick="
+document.getElementById('splash').classList.add('hidden');
+document.getElementById('turno').classList.remove('hidden');
+window.scrollTo(0,0);
+">INICIAR</button>
         <div class="firma">By Rubén D.® 268</div>
       </div>
     </section>
