@@ -198,9 +198,31 @@
 });
 
     function iniciarTurno(){
-      if(!$('operario').value.trim()){toast('Mete Nº operario');return}
-      app.linea=$('lineaTurno').value; app.turno=$('turnoActual').value; app.fecha=$('fechaTurno').value; app.operario=$('operario').value.trim();
-      openPanel(app.linea);
+
+  if(!$('operario').value.trim()){
+    toast('Mete Nº operario');
+    return;
+  }
+
+  app.linea = $('lineaTurno').value;
+  app.turno = $('turnoActual').value;
+  app.fecha = $('fechaTurno').value;
+  app.operario = $('operario').value.trim();
+
+  save();
+
+  go('panel');
+
+  $('panelTitle').textContent =
+    `${app.linea} · Tirajes`;
+
+  $('sessionInfo').textContent =
+    sessionText();
+
+  $('chipSession').textContent =
+    `OP ${app.operario}`;
+
+  renderTirajes();
     }
     function sessionText(){return `${app.linea} · ${app.turno} · Operario ${app.operario} · ${app.fecha}`}
     function openPanel(linea){
