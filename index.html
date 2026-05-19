@@ -193,7 +193,9 @@
     function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
     function today(){return new Date().toISOString().slice(0,10)}
     function uid(){return Date.now()+'_'+Math.random().toString(16).slice(2)}
-    $('fechaTurno').value=today();
+    window.addEventListener('DOMContentLoaded',()=>{
+  $('fechaTurno').value=today();
+});
 
     function iniciarTurno(){
       if(!$('operario').value.trim()){toast('Mete Nº operario');return}
