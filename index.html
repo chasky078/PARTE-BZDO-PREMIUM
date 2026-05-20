@@ -177,7 +177,40 @@
       text-align:left;
       padding:22px;
     }
+.menu-card{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:20px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(180deg,#0f2747,#0a1c33);
+    color:white;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
+.menu-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(50,170,255,.45);
+}
+
+.menu-card span{
+    font-size:34px;
+}
+
+.menu-card b{
+    display:block;
+    font-size:20px;
+    margin-bottom:4px;
+}
+
+.menu-card small{
+    opacity:.7;
+    font-size:14px;
+}
     .menu-btn b{display:block;font-size:22px;margin-bottom:8px}
     .menu-btn span{display:block;color:#cfe3f8;font-size:13px;font-weight:850;opacity:.86}
     .menu-btn.locked{opacity:.55;filter:saturate(.5)}
@@ -424,6 +457,13 @@ By Rubén D. 268
       </div>
 
       <div class="menu-grid">
+        <button class="menu-card" onclick="go('seguridad')">
+    <span>⚠</span>
+    <div>
+        <b>SEGURIDAD · EPIS</b>
+        <small>Normas obligatorias y riesgos</small>
+    </div>
+        </button>
         <button class="menu-btn locked" onclick="toast('Corte pendiente: CL05 / Bobinas')">
           <b>CORTE</b>
           <span>CL05, bobinas y futuras herramientas.</span>
