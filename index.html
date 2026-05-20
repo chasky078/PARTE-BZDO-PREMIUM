@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#06111f" />
-  <title>Barnizado · Parte Control Cola</title>
+  <title>Sonoco Asturias · Barnizado</title>
 
   <style>
     :root{
@@ -60,7 +60,9 @@
       box-shadow:0 14px 30px rgba(0,111,209,.34);
       cursor:pointer;
     }
+
     button:active{transform:scale(.98)}
+
     .ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);box-shadow:none}
     .green{background:linear-gradient(135deg,#27d17d,#0c8f4f)}
     .yellow{background:linear-gradient(135deg,#ffd34d,#c97900);color:#132033}
@@ -75,6 +77,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .splash::before{
       content:"SONOCO";
       position:absolute;
@@ -86,6 +89,7 @@
       white-space:nowrap;
       pointer-events:none;
     }
+
     .splash-card{
       position:relative;
       width:min(760px,100%);
@@ -96,21 +100,23 @@
       box-shadow:var(--shadow);
       backdrop-filter:blur(14px);
     }
+
     .logo{
-      width:112px;
-      height:72px;
+      width:132px;
+      height:78px;
       margin:0 auto 22px;
       display:grid;
       place-items:center;
       color:white;
       font-weight:1000;
       letter-spacing:-.05em;
-      font-size:30px;
+      font-size:28px;
       border-radius:24px;
       border:1px solid rgba(255,255,255,.16);
       background:linear-gradient(145deg,#0f355f,#071426);
       box-shadow:0 20px 38px rgba(36,168,255,.20), inset 0 0 18px rgba(255,255,255,.06);
     }
+
     .badge{
       display:inline-flex;
       padding:8px 14px;
@@ -122,12 +128,14 @@
       font-weight:950;
       letter-spacing:.12em;
     }
+
     h1{
       margin:16px 0 8px;
       font-size:clamp(38px,7vw,78px);
       line-height:.9;
       letter-spacing:-.055em;
     }
+
     .subtitle{margin:0;color:var(--muted);font-size:18px;font-weight:850}
     .plant{margin:14px 0 28px;color:#dff9ff;font-weight:950;letter-spacing:.16em}
     .firma{margin-top:18px;color:rgba(255,255,255,.48);font-size:13px;font-weight:950;letter-spacing:.08em}
@@ -145,9 +153,11 @@
       background:linear-gradient(180deg,rgba(6,17,31,.97),rgba(6,17,31,.76),transparent);
       backdrop-filter:blur(10px);
     }
+
     .brand strong{display:block;font-size:24px;letter-spacing:-.03em}
     .brand span{display:block;color:var(--muted);font-size:13px;font-weight:850;margin-top:3px}
     .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
     .chip{
       display:inline-flex;
       align-items:center;
@@ -163,6 +173,7 @@
     }
 
     .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:18px}
+
     .menu-btn{
       min-height:122px;
       border-radius:28px;
@@ -172,11 +183,14 @@
       text-align:left;
       padding:22px;
     }
+
     .menu-btn b{display:block;font-size:22px;margin-bottom:8px}
     .menu-btn span{display:block;color:#cfe3f8;font-size:13px;font-weight:850;opacity:.86}
+    .menu-btn.locked{opacity:.55;filter:saturate(.5)}
 
     .grid{display:grid;gap:16px}
     .two{grid-template-columns:minmax(0,1fr) minmax(330px,430px)}
+
     .card{
       background:linear-gradient(160deg,rgba(16,43,73,.92),rgba(9,25,45,.88));
       border:1px solid rgba(255,255,255,.12);
@@ -184,11 +198,13 @@
       box-shadow:var(--shadow);
       padding:18px;
     }
+
     .title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
     .title h2,.title h3{margin:0;font-size:20px;letter-spacing:-.02em}
     .title small{color:var(--muted);font-weight:950}
 
     label{display:block;margin-bottom:8px;color:#cfe3f8;font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.09em}
+
     input,select,textarea{
       width:100%;
       min-height:52px;
@@ -200,12 +216,14 @@
       font-size:17px;
       outline:none;
     }
+
     textarea{min-height:96px;resize:vertical}
     input:focus,select:focus,textarea:focus{border-color:rgba(36,168,255,.75);box-shadow:0 0 0 4px rgba(36,168,255,.12)}
     .form{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px}
     .wide{grid-column:1/-1}
 
     .pill-row{display:flex;flex-wrap:wrap;gap:10px}
+
     .pill{
       padding:13px 16px;
       border-radius:16px;
@@ -215,6 +233,7 @@
       cursor:pointer;
       user-select:none;
     }
+
     .pill.active{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:transparent;box-shadow:0 10px 24px rgba(36,168,255,.24)}
     .pill.green.active{background:linear-gradient(135deg,#27d17d,#0c8f4f)}
     .pill.yellow.active{background:linear-gradient(135deg,#ffd34d,#c97900);color:#132033}
@@ -229,10 +248,20 @@
     .ret{background:rgba(255,211,77,.18);border-color:rgba(255,211,77,.45);color:#ffe9a3}
 
     .list{display:grid;gap:12px}
-    .item{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:20px;padding:14px;display:grid;gap:10px}
+
+    .item{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.045);
+      border-radius:20px;
+      padding:14px;
+      display:grid;
+      gap:10px;
+    }
+
     .row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
     .item strong{font-size:19px}
     .item p{margin:4px 0 0;color:var(--muted);font-weight:750}
+
     .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}
     .stat{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px}
     .stat small{display:block;color:var(--muted);font-size:11px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
@@ -255,6 +284,11 @@
     .palets-body{display:none;margin-top:12px}
     .palets-body.open{display:block}
     .palets-result{margin-top:10px;color:#dff9ff;font-weight:950;display:none}
+
+    .safety-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .safety-card{border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:16px}
+    .safety-card b{font-size:18px}
+    .safety-card p{color:var(--muted);font-weight:750}
 
     .bottom-bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:linear-gradient(180deg,transparent,rgba(5,11,20,.92) 24%,rgba(5,11,20,.98));padding:16px;pointer-events:none}
     .bottom-bar .inner{max-width:1220px;margin:auto;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;pointer-events:auto}
@@ -285,22 +319,61 @@
       <div class="splash-card">
         <div class="logo">SONOCO</div>
         <span class="badge">SONOCO · ASTURIAS</span>
-        <h1>BARNIZADO</h1>
-        <p class="subtitle">PARTE CONTROL COLA</p>
-        <div class="plant">PRODUCCIÓN · CALIDAD · TRAZABILIDAD</div>
-        <button onclick="go('menu')">ENTRAR</button>
+        <h1>PRODUCCIÓN</h1>
+        <p class="subtitle">Sistema interno beta</p>
+        <div class="plant">CORTE · BARNIZADO · TAPAS · CARGAS</div>
+        <button onclick="go('hub')">ENTRAR</button>
         <div class="firma">By Rubén D.® 268</div>
       </div>
     </section>
 
-    <section id="menu" class="screen hidden">
+    <section id="hub" class="screen hidden">
+      <div class="topbar">
+        <div class="brand">
+          <strong>SONOCO ASTURIAS</strong>
+          <span>Menú principal de secciones</span>
+        </div>
+        <div class="actions">
+          <button class="ghost" onclick="go('splash')">Inicio</button>
+        </div>
+      </div>
+
+      <div class="menu-grid">
+        <button class="menu-btn locked" onclick="toast('Corte pendiente: CL05 / Bobinas')">
+          <b>CORTE</b>
+          <span>CL05, bobinas y futuras herramientas.</span>
+        </button>
+        <button class="menu-btn" onclick="go('barnizadoMenu')">
+          <b>BARNIZADO</b>
+          <span>Parte Control Cola, tirajes y paquetes.</span>
+        </button>
+        <button class="menu-btn locked" onclick="toast('Tapas pendiente')">
+          <b>TAPAS</b>
+          <span>Sección preparada para futuras herramientas.</span>
+        </button>
+        <button class="menu-btn locked" onclick="toast('Cargas pendiente')">
+          <b>CARGAS</b>
+          <span>Sección preparada para futuras herramientas.</span>
+        </button>
+        <button class="menu-btn orange" onclick="go('seguridadGeneral')">
+          <b>SEGURIDAD · EPIS</b>
+          <span>Normas generales obligatorias de fábrica.</span>
+        </button>
+        <button class="menu-btn" onclick="go('ajustes')">
+          <b>AJUSTES</b>
+          <span>Versión, actualizaciones y modo administrador.</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="barnizadoMenu" class="screen hidden">
       <div class="topbar">
         <div class="brand">
           <strong>BARNIZADO</strong>
           <span>Parte Control Cola · Sonoco Asturias</span>
         </div>
         <div class="actions">
-          <button class="ghost" onclick="go('splash')">Inicio</button>
+          <button class="ghost" onclick="go('hub')">Secciones</button>
         </div>
       </div>
 
@@ -317,6 +390,10 @@
           <b>DASHBOARD</b>
           <span>Resumen beta de tirajes y paquetes guardados.</span>
         </button>
+        <button class="menu-btn orange" onclick="go('seguridadBarnizado')">
+          <b>SEGURIDAD BARNIZADO</b>
+          <span>Normas específicas de sección.</span>
+        </button>
         <button class="menu-btn" onclick="go('help')">
           <b>AYUDA</b>
           <span>Guía rápida de uso del parte digital.</span>
@@ -331,15 +408,12 @@
           <span>Selecciona línea y operario</span>
         </div>
         <div class="actions">
-          <button class="ghost" onclick="go('menu')">Menú</button>
+          <button class="ghost" onclick="go('barnizadoMenu')">Menú Barnizado</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="title">
-          <h2>Datos de entrada</h2>
-          <small>SONOCO · ASTURIAS</small>
-        </div>
+        <div class="title"><h2>Datos de entrada</h2><small>SONOCO · ASTURIAS</small></div>
         <div class="form">
           <div>
             <label>Línea</label>
@@ -349,12 +423,7 @@
               <option>LP02</option><option>LP03</option><option>LP04</option>
             </select>
           </div>
-          <div>
-            <label>Turno</label>
-            <select id="turnoActual">
-              <option>Mañana</option><option>Tarde</option><option>Noche</option>
-            </select>
-          </div>
+          <div><label>Turno</label><select id="turnoActual"><option>Mañana</option><option>Tarde</option><option>Noche</option></select></div>
           <div><label>Fecha</label><input id="fechaTurno" type="date"></div>
           <div><label>Nº operario</label><input id="operario" inputmode="numeric" placeholder="Ej: 27"></div>
         </div>
@@ -372,16 +441,13 @@
         <div class="actions">
           <span class="chip" id="chipSession">OP -</span>
           <button onclick="nuevoTiraje()">+ AÑADIR TIRAJE</button>
-          <button class="ghost" onclick="go('menu')">Menú</button>
+          <button class="ghost" onclick="go('barnizadoMenu')">Menú</button>
           <button class="orange" onclick="abrirModalFinTurno()">FIN TURNO</button>
         </div>
       </div>
 
       <div class="card">
-        <div class="title">
-          <h2>Tirajes</h2>
-          <small id="tirajeCount">0</small>
-        </div>
+        <div class="title"><h2>Tirajes</h2><small id="tirajeCount">0</small></div>
         <div id="tirajeList" class="list"></div>
       </div>
     </section>
@@ -403,10 +469,7 @@
       <div class="grid two">
         <div class="grid">
           <div class="card">
-            <div class="title">
-              <h2>Datos del tiraje</h2>
-              <span id="estadoTiraje" class="status abierto">ABIERTO</span>
-            </div>
+            <div class="title"><h2>Datos del tiraje</h2><span id="estadoTiraje" class="status abierto">ABIERTO</span></div>
             <div class="form">
               <div><label>Orden / Tiraje</label><input id="tiraje" inputmode="numeric" placeholder="Nº tiraje"></div>
               <div><label>Material</label><input id="material" placeholder="310661 - 00023"></div>
@@ -525,17 +588,81 @@
     <section id="dashboard" class="screen hidden">
       <div class="topbar">
         <div class="brand"><strong>Dashboard</strong><span>Resumen beta Barnizado</span></div>
-        <div class="actions"><button class="ghost" onclick="go('menu')">Menú</button></div>
+        <div class="actions"><button class="ghost" onclick="go('barnizadoMenu')">Menú</button></div>
       </div>
       <div class="grid">
         <div class="card"><div class="title"><h2>Resumen</h2><small>BETA</small></div><div id="dashboardContent" class="stats"></div></div>
       </div>
     </section>
 
+    <section id="seguridadGeneral" class="screen hidden">
+      <div class="topbar">
+        <div class="brand"><strong>Seguridad · EPIS</strong><span>Normas generales de fábrica</span></div>
+        <div class="actions"><button class="ghost" onclick="go('hub')">Secciones</button></div>
+      </div>
+      <div class="card">
+        <div class="title"><h2>Normas generales</h2><small>OBLIGATORIO</small></div>
+        <div class="safety-grid">
+          <div class="safety-card"><b>EPIS obligatorios</b><p>Gafas, calzado de seguridad, protección auditiva y equipos indicados por zona.</p></div>
+          <div class="safety-card"><b>Circulación segura</b><p>Respeta pasos, carretillas, zonas señalizadas y comunicación visual.</p></div>
+          <div class="safety-card"><b>Cuida de tu compañero</b><p>Si ves una situación insegura, avisa. La seguridad es de todos.</p></div>
+          <div class="safety-card"><b>Los 5 inaceptables</b><p>Apartado reservado para normas internas y carteles reales.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seguridadBarnizado" class="screen hidden">
+      <div class="topbar">
+        <div class="brand"><strong>Seguridad Barnizado</strong><span>Normas específicas de sección</span></div>
+        <div class="actions"><button class="ghost" onclick="go('barnizadoMenu')">Menú Barnizado</button></div>
+      </div>
+      <div class="card">
+        <div class="title"><h2>Barnizado · EPIS / Riesgos</h2><small>BETA</small></div>
+        <div class="safety-grid">
+          <div class="safety-card"><b>Manipulación de hojalata</b><p>Atención a cortes, bordes y paquetes. Usar los EPIS indicados.</p></div>
+          <div class="safety-card"><b>Atranques / intervención</b><p>Seguir procedimiento seguro antes de intervenir en máquina.</p></div>
+          <div class="safety-card"><b>Ruido / horno / línea</b><p>Respetar zonas y señalización. Protección auditiva donde proceda.</p></div>
+          <div class="safety-card"><b>Carteles reales</b><p>Aquí añadiremos las fotos y normas específicas que recopiles.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ajustes" class="screen hidden">
+      <div class="topbar">
+        <div class="brand"><strong>Ajustes</strong><span>Versión, actualizaciones y administrador</span></div>
+        <div class="actions"><button class="ghost" onclick="go('hub')">Secciones</button></div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="title"><h2>Actualizaciones</h2><small>v0.4 beta</small></div>
+          <p>· Menú principal Sonoco Asturias.</p>
+          <p>· Menú Barnizado con Seguridad, Dashboard y Ayuda.</p>
+          <p>· Parte Control Cola con etiqueta simulada y sello.</p>
+          <p>· Modo administrador beta.</p>
+        </div>
+        <div class="card">
+          <div class="title"><h2>Administrador</h2><small>Acceso protegido beta</small></div>
+          <div class="form">
+            <div><label>Código administrador</label><input id="adminCode" inputmode="numeric" placeholder="Código"></div>
+          </div>
+          <br>
+          <button onclick="adminLogin()">ENTRAR ADMIN</button>
+          <br><br>
+          <div id="adminPanel" class="hidden">
+            <div class="card">
+              <h3>Modo Admin activo</h3>
+              <p>Zona preparada para futuras herramientas: editar textos, resetear datos, revisar versiones y mantenimiento.</p>
+              <button class="red" onclick="adminClearData()">BORRAR DATOS BZDO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="help" class="screen hidden">
       <div class="topbar">
         <div class="brand"><strong>Ayuda</strong><span>Guía rápida Parte Control Cola</span></div>
-        <div class="actions"><button class="ghost" onclick="go('menu')">Menú</button></div>
+        <div class="actions"><button class="ghost" onclick="go('barnizadoMenu')">Menú</button></div>
       </div>
       <div class="card">
         <h2>Uso básico</h2>
@@ -570,7 +697,8 @@
   <div id="toast" class="toast">Guardado</div>
 
   <script>
-    const KEY = 'BZDO_MENU_PREMIUM_V1';
+    const KEY = 'BZDO_HUB_PREMIUM_V1';
+    const ADMIN_CODE = '268';
     const $ = (id) => document.getElementById(id);
 
     let data = loadData();
@@ -581,13 +709,17 @@
       bindInputs();
     });
 
-    function loadData(){ try{ return JSON.parse(localStorage.getItem(KEY)) || []; }catch(e){ return []; } }
+    function loadData(){
+      try{ return JSON.parse(localStorage.getItem(KEY)) || []; }
+      catch(e){ return []; }
+    }
+
     function saveData(){ localStorage.setItem(KEY, JSON.stringify(data)); }
     function today(){ return new Date().toISOString().slice(0,10); }
     function uid(){ return Date.now() + '_' + Math.random().toString(16).slice(2); }
 
     function go(screenId){
-      ['splash','menu','turno','panel','editor','dashboard','help'].forEach(id => $(id).classList.add('hidden'));
+      ['splash','hub','barnizadoMenu','turno','panel','editor','dashboard','seguridadGeneral','seguridadBarnizado','ajustes','help'].forEach(id => $(id).classList.add('hidden'));
       $(screenId).classList.remove('hidden');
       window.scrollTo(0,0);
     }
@@ -651,7 +783,11 @@
 
     function nuevoTiraje(){
       if(!app.linea){ toast('Primero inicia turno'); go('turno'); return; }
-      const tiraje = { id:uid(), linea:app.linea, fecha:app.fecha || today(), turnoInicio:app.turno || '', operarioInicio:app.operario || '', estado:'ABIERTO', tiraje:'', material:'', aplicacion:'', huella:'', ci:false, ce:false, lito:false, ultimo:false, sello:false, paquetes:[], updated:new Date().toISOString() };
+      const tiraje = {
+        id:uid(), linea:app.linea, fecha:app.fecha || today(), turnoInicio:app.turno || '', operarioInicio:app.operario || '',
+        estado:'ABIERTO', tiraje:'', material:'', aplicacion:'', huella:'', ci:false, ce:false, lito:false, ultimo:false, sello:false,
+        paquetes:[], updated:new Date().toISOString()
+      };
       data.push(tiraje);
       saveData();
       abrirTiraje(tiraje.id);
@@ -671,7 +807,11 @@
       $('material').value = t.material || '';
       $('aplicacion').value = t.aplicacion || '';
       $('huella').value = t.huella || '';
-      setActive('ci', !!t.ci); setActive('ce', !!t.ce); setActive('lito', !!t.lito); setActive('ultimo', !!t.ultimo); setActive('sello', !!t.sello);
+      setActive('ci', !!t.ci);
+      setActive('ce', !!t.ce);
+      setActive('lito', !!t.lito);
+      setActive('ultimo', !!t.ultimo);
+      setActive('sello', !!t.sello);
       renderEstadoTiraje();
       renderPackages();
       limpiarPaquete(false);
@@ -746,7 +886,14 @@
       readTirajeForm();
       const t = getTirajeActual();
       if(!t){ toast('Primero añade un tiraje'); return; }
-      const paquete = { numero:$('paqNumero').value.trim(), matricula:$('matricula').value.trim(), predecesor:$('predecesor').value.trim(), hojasEtiqueta:$('hojasEtiqueta').value.trim(), hojasContador:$('hojasContador').value.trim(), hojasRevisadas:$('hojasRevisadas').value.trim(), hojasBuenas:$('hojasBuenas').value.trim(), maculas:$('maculas').value.trim(), totalHojas:$('totalHojas').value.trim(), fleje:$('fleje').classList.contains('active'), volteo:$('volteo').classList.contains('active'), cerrar:$('cerrar').classList.contains('active'), estado:app.estadoPaquete, observaciones:$('observaciones').value.trim(), sello:$('sello').classList.contains('active'), operario:app.operario, turno:app.turno, fecha:app.fecha, created:new Date().toISOString() };
+      const paquete = {
+        numero:$('paqNumero').value.trim(), matricula:$('matricula').value.trim(), predecesor:$('predecesor').value.trim(),
+        hojasEtiqueta:$('hojasEtiqueta').value.trim(), hojasContador:$('hojasContador').value.trim(), hojasRevisadas:$('hojasRevisadas').value.trim(),
+        hojasBuenas:$('hojasBuenas').value.trim(), maculas:$('maculas').value.trim(), totalHojas:$('totalHojas').value.trim(),
+        fleje:$('fleje').classList.contains('active'), volteo:$('volteo').classList.contains('active'), cerrar:$('cerrar').classList.contains('active'),
+        estado:app.estadoPaquete, observaciones:$('observaciones').value.trim(), sello:$('sello').classList.contains('active'),
+        operario:app.operario, turno:app.turno, fecha:app.fecha, created:new Date().toISOString()
+      };
       t.paquetes.push(paquete);
       t.updated = new Date().toISOString();
       saveData();
@@ -833,6 +980,23 @@
       const fin = data.filter(t => t.estado === 'FIN TIRAJE').length;
       $('dashboardContent').innerHTML = `<div class="stat"><small>Tirajes</small><b>${tirajes}</b></div><div class="stat"><small>Paquetes</small><b>${paquetes}</b></div><div class="stat"><small>Abiertos</small><b>${abiertos}</b></div><div class="stat"><small>Finalizados</small><b>${fin}</b></div>`;
       go('dashboard');
+    }
+
+    function adminLogin(){
+      const code = $('adminCode').value.trim();
+      if(code !== ADMIN_CODE){
+        toast('Código incorrecto');
+        return;
+      }
+      $('adminPanel').classList.remove('hidden');
+      toast('Modo Admin activo');
+    }
+
+    function adminClearData(){
+      if(prompt('Escribe BORRAR para borrar datos') !== 'BORRAR') return;
+      data = [];
+      saveData();
+      toast('Datos borrados');
     }
 
     function bindInputs(){
